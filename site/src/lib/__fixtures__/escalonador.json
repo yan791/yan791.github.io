@@ -1,0 +1,50 @@
+[
+ {
+  "nome": "01-readme",
+  "entrada": "20\nNAV 5 5 2\nCOM 10 8 3\n",
+  "rate": "EXECUTION BY RATE\n[NAV] for 2 units - F\n[COM] for 3 units - F\n[NAV] for 2 units - F\nidle for 3 units\n[NAV] for 2 units - F\n[COM] for 3 units - F\n[NAV] for 2 units - F\nidle for 3 units\nLOST DEADLINES\n[NAV] 0\n[COM] 0\nCOMPLETE EXECUTION\n[NAV] 4\n[COM] 2\nKILLED\n[NAV] 0\n[COM] 0\n",
+  "edf": "EXECUTION BY EDF\n[NAV] for 2 units - F\n[COM] for 3 units - F\n[NAV] for 2 units - F\nidle for 3 units\n[NAV] for 2 units - F\n[COM] for 3 units - F\n[NAV] for 2 units - F\nidle for 3 units\nLOST DEADLINES\n[NAV] 0\n[COM] 0\nCOMPLETE EXECUTION\n[NAV] 4\n[COM] 2\nKILLED\n[NAV] 0\n[COM] 0\n"
+ },
+ {
+  "nome": "02-rm-perde",
+  "entrada": "35\nA 5 5 2\nB 7 7 4\n",
+  "rate": "EXECUTION BY RATE\n[A] for 2 units - F\n[B] for 3 units - H\n[A] for 2 units - F\n[B] for 3 units - H\n[A] for 2 units - F\n[B] for 1 units - F\nidle for 1 units\n[B] for 1 units - H\n[A] for 2 units - F\n[B] for 3 units - F\n[A] for 2 units - F\n[B] for 3 units - H\n[A] for 2 units - F\n[B] for 3 units - H\n[A] for 2 units - F\n[B] for 2 units - F\nidle for 1 units\nLOST DEADLINES\n[A] 0\n[B] 1\nCOMPLETE EXECUTION\n[A] 7\n[B] 4\nKILLED\n[A] 0\n[B] 0\n",
+  "edf": "EXECUTION BY EDF\n[A] for 2 units - F\n[B] for 4 units - F\n[A] for 2 units - F\n[B] for 4 units - F\n[A] for 2 units - F\n[B] for 1 units - H\n[A] for 2 units - F\n[B] for 3 units - F\n[A] for 2 units - F\n[B] for 4 units - F\n[A] for 2 units - F\n[B] for 2 units - H\n[A] for 2 units - F\n[B] for 2 units - F\nidle for 1 units\nLOST DEADLINES\n[A] 0\n[B] 0\nCOMPLETE EXECUTION\n[A] 7\n[B] 5\nKILLED\n[A] 0\n[B] 0\n"
+ },
+ {
+  "nome": "03-tres",
+  "entrada": "30\nNAV 4 4 1\nCOM 6 5 2\nLOG 12 12 3\n",
+  "rate": "EXECUTION BY RATE\n[NAV] for 1 units - F\n[COM] for 2 units - F\n[LOG] for 1 units - H\n[NAV] for 1 units - F\n[LOG] for 1 units - H\n[COM] for 2 units - F\n[NAV] for 1 units - F\n[LOG] for 1 units - F\nidle for 2 units\n[NAV] for 1 units - F\n[COM] for 2 units - F\n[LOG] for 1 units - H\n[NAV] for 1 units - F\n[LOG] for 1 units - H\n[COM] for 2 units - F\n[NAV] for 1 units - F\n[LOG] for 1 units - F\nidle for 2 units\n[NAV] for 1 units - F\n[COM] for 2 units - F\n[LOG] for 1 units - H\n[NAV] for 1 units - F\n[LOG] for 1 units - K\nLOST DEADLINES\n[NAV] 0\n[COM] 0\n[LOG] 0\nCOMPLETE EXECUTION\n[NAV] 8\n[COM] 5\n[LOG] 2\nKILLED\n[NAV] 0\n[COM] 0\n[LOG] 1\n",
+  "edf": "EXECUTION BY EDF\n[NAV] for 1 units - F\n[COM] for 2 units - F\n[LOG] for 1 units - H\n[NAV] for 1 units - F\n[LOG] for 1 units - H\n[COM] for 2 units - F\n[NAV] for 1 units - F\n[LOG] for 1 units - F\nidle for 2 units\n[NAV] for 1 units - F\n[COM] for 2 units - F\n[LOG] for 1 units - H\n[NAV] for 1 units - F\n[LOG] for 1 units - H\n[COM] for 2 units - F\n[NAV] for 1 units - F\n[LOG] for 1 units - F\nidle for 2 units\n[NAV] for 1 units - F\n[COM] for 2 units - F\n[LOG] for 1 units - H\n[NAV] for 1 units - F\n[LOG] for 1 units - K\nLOST DEADLINES\n[NAV] 0\n[COM] 0\n[LOG] 0\nCOMPLETE EXECUTION\n[NAV] 8\n[COM] 5\n[LOG] 2\nKILLED\n[NAV] 0\n[COM] 0\n[LOG] 1\n"
+ },
+ {
+  "nome": "04-deadline-curto",
+  "entrada": "24\nT1 6 4 2\nT2 8 8 3\nT3 12 10 2\n",
+  "rate": "EXECUTION BY RATE\n[T1] for 2 units - F\n[T2] for 3 units - F\n[T3] for 1 units - H\n[T1] for 2 units - F\n[T2] for 3 units - F\nidle for 1 units\n[T1] for 2 units - F\n[T3] for 2 units - F\n[T2] for 2 units - H\n[T1] for 2 units - F\n[T2] for 1 units - F\nidle for 3 units\nLOST DEADLINES\n[T1] 0\n[T2] 0\n[T3] 1\nCOMPLETE EXECUTION\n[T1] 4\n[T2] 3\n[T3] 1\nKILLED\n[T1] 0\n[T2] 0\n[T3] 0\n",
+  "edf": "EXECUTION BY EDF\n[T1] for 2 units - F\n[T2] for 3 units - F\n[T3] for 1 units - H\n[T1] for 2 units - F\n[T3] for 1 units - F\n[T2] for 3 units - F\n[T1] for 2 units - F\n[T3] for 2 units - F\n[T2] for 2 units - H\n[T1] for 2 units - F\n[T2] for 1 units - F\nidle for 3 units\nLOST DEADLINES\n[T1] 0\n[T2] 0\n[T3] 0\nCOMPLETE EXECUTION\n[T1] 4\n[T2] 3\n[T3] 2\nKILLED\n[T1] 0\n[T2] 0\n[T3] 0\n"
+ },
+ {
+  "nome": "05-sobrecarga",
+  "entrada": "20\nX 4 4 3\nY 6 6 3\n",
+  "rate": "EXECUTION BY RATE\n[X] for 3 units - F\n[Y] for 1 units - H\n[X] for 3 units - F\n[Y] for 1 units - H\n[X] for 3 units - F\n[Y] for 1 units - L\n[X] for 3 units - F\n[Y] for 1 units - H\n[X] for 3 units - F\n[Y] for 1 units - K\nLOST DEADLINES\n[X] 0\n[Y] 3\nCOMPLETE EXECUTION\n[X] 5\n[Y] 0\nKILLED\n[X] 0\n[Y] 1\n",
+  "edf": "EXECUTION BY EDF\n[X] for 3 units - F\n[Y] for 3 units - F\n[X] for 5 units - F\n[Y] for 1 units - L\n[X] for 3 units - F\n[Y] for 3 units - F\n[X] for 2 units - L\nLOST DEADLINES\n[X] 2\n[Y] 1\nCOMPLETE EXECUTION\n[X] 3\n[Y] 2\nKILLED\n[X] 0\n[Y] 1\n"
+ },
+ {
+  "nome": "06-empate",
+  "entrada": "20\nP 5 5 1\nQ 5 5 2\n",
+  "rate": "EXECUTION BY RATE\n[P] for 1 units - F\n[Q] for 2 units - F\nidle for 2 units\n[P] for 1 units - F\n[Q] for 2 units - F\nidle for 2 units\n[P] for 1 units - F\n[Q] for 2 units - F\nidle for 2 units\n[P] for 1 units - F\n[Q] for 2 units - F\nidle for 2 units\nLOST DEADLINES\n[P] 0\n[Q] 0\nCOMPLETE EXECUTION\n[P] 4\n[Q] 4\nKILLED\n[P] 0\n[Q] 0\n",
+  "edf": "EXECUTION BY EDF\n[P] for 1 units - F\n[Q] for 2 units - F\nidle for 2 units\n[P] for 1 units - F\n[Q] for 2 units - F\nidle for 2 units\n[P] for 1 units - F\n[Q] for 2 units - F\nidle for 2 units\n[P] for 1 units - F\n[Q] for 2 units - F\nidle for 2 units\nLOST DEADLINES\n[P] 0\n[Q] 0\nCOMPLETE EXECUTION\n[P] 4\n[Q] 4\nKILLED\n[P] 0\n[Q] 0\n"
+ },
+ {
+  "nome": "07-fim",
+  "entrada": "13\nA 10 10 6\nB 4 4 2\n",
+  "rate": "EXECUTION BY RATE\n[B] for 2 units - F\n[A] for 2 units - H\n[B] for 2 units - F\n[A] for 2 units - H\n[B] for 2 units - F\n[A] for 2 units - H\n[B] for 1 units - K\nLOST DEADLINES\n[A] 1\n[B] 0\nCOMPLETE EXECUTION\n[A] 0\n[B] 3\nKILLED\n[A] 1\n[B] 1\n",
+  "edf": "EXECUTION BY EDF\n[B] for 2 units - F\n[A] for 2 units - H\n[B] for 2 units - F\n[A] for 4 units - F\n[B] for 3 units - K\nLOST DEADLINES\n[A] 0\n[B] 0\nCOMPLETE EXECUTION\n[A] 1\n[B] 3\nKILLED\n[A] 1\n[B] 1\n"
+ },
+ {
+  "nome": "08-quatro",
+  "entrada": "40\nGPS 8 6 2\nRADIO 10 10 3\nMOTOR 20 15 6\nCABINE 40 40 4\n",
+  "rate": "EXECUTION BY RATE\n[GPS] for 2 units - F\n[RADIO] for 3 units - F\n[MOTOR] for 3 units - H\n[GPS] for 2 units - F\n[RADIO] for 3 units - F\n[MOTOR] for 2 units - L\n[CABINE] for 1 units - H\n[GPS] for 2 units - F\n[CABINE] for 2 units - H\n[RADIO] for 3 units - F\n[MOTOR] for 1 units - H\n[GPS] for 2 units - F\n[MOTOR] for 4 units - H\n[RADIO] for 2 units - H\n[GPS] for 2 units - F\n[RADIO] for 1 units - F\n[CABINE] for 1 units - F\nidle for 4 units\nLOST DEADLINES\n[GPS] 0\n[RADIO] 0\n[MOTOR] 2\n[CABINE] 0\nCOMPLETE EXECUTION\n[GPS] 5\n[RADIO] 4\n[MOTOR] 0\n[CABINE] 1\nKILLED\n[GPS] 0\n[RADIO] 0\n[MOTOR] 0\n[CABINE] 0\n",
+  "edf": "EXECUTION BY EDF\n[GPS] for 2 units - F\n[RADIO] for 3 units - F\n[MOTOR] for 3 units - H\n[GPS] for 2 units - F\n[MOTOR] for 3 units - F\n[RADIO] for 3 units - F\n[GPS] for 2 units - F\n[CABINE] for 2 units - H\n[RADIO] for 3 units - F\n[MOTOR] for 1 units - H\n[GPS] for 2 units - F\n[MOTOR] for 5 units - F\n[RADIO] for 1 units - H\n[GPS] for 2 units - F\n[RADIO] for 2 units - F\n[CABINE] for 2 units - F\nidle for 2 units\nLOST DEADLINES\n[GPS] 0\n[RADIO] 0\n[MOTOR] 0\n[CABINE] 0\nCOMPLETE EXECUTION\n[GPS] 5\n[RADIO] 4\n[MOTOR] 2\n[CABINE] 1\nKILLED\n[GPS] 0\n[RADIO] 0\n[MOTOR] 0\n[CABINE] 0\n"
+ }
+]

@@ -1,0 +1,62 @@
+:root {
+  /* fundo escuro levemente azulado, nunca #000 */
+  --fundo: #090b11;
+  --superficie: #10131b;
+  --superficie-2: #151925;
+  --superficie-3: #1b2030;
+  --linha: rgba(232, 236, 248, 0.08);
+  --linha-forte: rgba(232, 236, 248, 0.16);
+
+  --texto: #eceef3;
+  --texto-2: #a2a8b8;
+  --texto-3: #8089a0; /* 5,3:1 sobre a superfície: serve para texto pequeno */
+
+  /* acento laranja, usado com moderação */
+  --sinal: #ff6a2b;
+  --sinal-2: #ff8a55;
+  --sinal-suave: rgba(255, 106, 43, 0.14);
+  --sinal-borda: rgba(255, 106, 43, 0.4);
+
+  --fosforo: #8fd3ff; /* só em terminal e código */
+
+  /* compatibilidade com componentes reaproveitados */
+  --tinta-950: var(--fundo);
+  --tinta-900: var(--superficie);
+  --tinta-800: var(--superficie-2);
+  --tinta-700: var(--superficie-3);
+  --tinta-600: #2a3142;
+  --pgm-1: #1e2433;
+  --pgm-2: #3b4256;
+  --pgm-3: var(--texto-3);
+  --pgm-4: #a3a8b6;
+  --pgm-5: #d5d8df;
+  --texto-claro: var(--texto);
+  --texto-claro-2: var(--texto-2);
+  --cor-texto: var(--texto);
+  --cor-texto-2: var(--texto-2);
+  --cor-linha: var(--linha);
+  --cor-borda: var(--linha-forte);
+  --cor-painel: var(--superficie-2);
+  --cor-painel-2: var(--superficie-3);
+
+  /* tipografia */
+  --fonte: 'Instrument Sans Variable', 'Instrument Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --fonte-texto: var(--fonte);
+  --fonte-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, Consolas, monospace;
+
+  /* espaço e forma */
+  --margem: clamp(20px, 4vw, 56px);
+  --largura-max: 1200px;
+  --raio: 18px;
+  --raio-p: 10px;
+  --altura-topo: 76px;
+
+  /* movimento */
+  --ease-saida: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-troca: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-micro: 160ms;
+  --dur-curta: 320ms;
+  --dur-media: 600ms;
+  --dur-longa: 900ms;
+  --stagger: 70ms;
+}

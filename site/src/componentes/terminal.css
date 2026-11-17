@@ -1,0 +1,174 @@
+.term {
+  display: grid;
+  gap: 16px;
+}
+.term__janela {
+  border-radius: var(--raio);
+  background: #0a0e18;
+  box-shadow: 0 0 0 1px var(--tinta-600), 0 30px 60px -30px rgba(0, 0, 0, 0.7);
+  overflow: hidden;
+}
+.term__barra {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 14px;
+  background: var(--tinta-800);
+  border-bottom: 1px solid var(--tinta-600);
+}
+.term__barra > span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--tinta-600);
+}
+.term__barra > span:first-child {
+  background: var(--sinal);
+}
+.term__barra p {
+  margin-left: 10px;
+  font-size: 11.5px;
+  color: var(--texto-claro-2);
+}
+.term__corpo {
+  height: 268px;
+  overflow: hidden;
+  padding: 14px 16px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--texto-claro);
+}
+.term__linha {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.term__prompt {
+  color: var(--fosforo);
+}
+.term__saida {
+  color: var(--texto-claro-2);
+}
+.term__var {
+  color: var(--sinal);
+  opacity: 0.9;
+}
+.term__cursor {
+  display: inline-block;
+  width: 0.6em;
+  height: 1.05em;
+  vertical-align: -0.18em;
+  margin-left: 1px;
+  background: var(--texto-claro);
+  animation: piscar 1s steps(1) infinite;
+}
+
+/* ---------- diagrama de processos ---------- */
+.term__diagrama {
+  width: 100%;
+  height: auto;
+  color: var(--texto-claro-2);
+  font-family: var(--fonte-mono);
+}
+.term__diagrama rect {
+  fill: var(--tinta-900);
+  stroke: var(--tinta-600);
+  stroke-width: 1;
+}
+.term__diagrama text {
+  fill: var(--texto-claro);
+  font-size: 12px;
+  text-anchor: middle;
+}
+.term__diagrama .d-rot {
+  text-anchor: start;
+  fill: var(--pgm-3);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.term__diagrama .d-item {
+  text-anchor: start;
+  fill: var(--texto-claro-2);
+  font-size: 11.5px;
+  animation: item 500ms var(--ease-saida) both;
+}
+@keyframes item {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+}
+.term__diagrama .d-mini {
+  font-size: 10px;
+  fill: var(--pgm-3);
+}
+.term__diagrama .d-esq {
+  text-anchor: end;
+}
+.term__diagrama .d-pai rect {
+  stroke: var(--texto-claro-2);
+}
+.d-fork {
+  fill: none;
+  stroke: var(--pgm-2);
+  stroke-width: 1.2;
+  stroke-dasharray: 4 4;
+}
+.d-cano {
+  fill: none;
+  stroke: var(--sinal);
+  stroke-width: 1.6;
+  color: var(--sinal);
+}
+.d-sinal {
+  fill: none;
+  stroke: var(--fosforo);
+  stroke-width: 1.2;
+  stroke-dasharray: 3 5;
+  color: var(--fosforo);
+}
+.term__diagrama .d-sinal-txt {
+  fill: var(--fosforo);
+}
+
+.d-pipe,
+.d-job,
+.d-job .d-sinal,
+.d-job .d-sinal-txt {
+  opacity: 0;
+  transition: opacity 600ms var(--ease-saida);
+}
+.d-pipe {
+  transform: translateY(8px);
+  transition: opacity 600ms var(--ease-saida), transform 600ms var(--ease-saida);
+}
+.fase-4 .d-pipe,
+.fase-5 .d-pipe,
+.fase-6 .d-pipe,
+.fase-7 .d-pipe,
+.fase-8 .d-pipe {
+  opacity: 1;
+  transform: none;
+}
+.fase-5 .d-pipe,
+.fase-6 .d-pipe,
+.fase-7 .d-pipe,
+.fase-8 .d-pipe {
+  opacity: 0.38;
+}
+.fase-6 .d-job,
+.fase-7 .d-job,
+.fase-8 .d-job {
+  opacity: 1;
+}
+.fase-6 .d-job rect,
+.fase-7 .d-job rect {
+  stroke: var(--sinal);
+}
+.fase-8 .d-job .d-sinal,
+.fase-8 .d-job .d-sinal-txt {
+  opacity: 1;
+}
+.fase-8 .d-job .d-estado {
+  fill: var(--fosforo);
+}

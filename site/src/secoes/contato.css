@@ -1,0 +1,108 @@
+.contato__grade {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 16px;
+}
+.contato__cartao {
+  display: grid;
+  gap: 14px;
+  align-content: start;
+  padding: 26px;
+}
+.contato__email {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+}
+.contato__email a {
+  font-size: clamp(20px, 2.2vw, 26px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  word-break: break-all;
+  transition: color var(--dur-curta);
+}
+.contato__email a:hover {
+  color: var(--sinal);
+}
+.contato__copiar {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 0 12px;
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 1px var(--linha-forte);
+  font-family: var(--fonte-mono);
+  font-size: 12px;
+  color: var(--texto-2);
+  transition: color var(--dur-curta), box-shadow var(--dur-curta);
+}
+.contato__copiar:hover {
+  color: var(--texto);
+  box-shadow: inset 0 0 0 1px rgba(232, 236, 248, 0.3);
+}
+.contato__rotulo-2 {
+  margin-top: 10px;
+}
+.contato__redes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.contato__redes a {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: var(--superficie-2);
+  box-shadow: inset 0 0 0 1px var(--linha);
+  color: var(--texto-2);
+  transition: color var(--dur-curta), background var(--dur-curta), transform var(--dur-curta) var(--ease-saida);
+}
+.contato__redes a:hover {
+  color: var(--texto);
+  background: var(--superficie-3);
+  transform: translateY(-2px);
+}
+.contato__linkedin {
+  justify-self: start;
+  margin-top: 6px;
+}
+
+.contato__form input,
+.contato__form textarea {
+  width: 100%;
+  padding: 13px 15px;
+  border-radius: 12px;
+  border: 1px solid var(--linha-forte);
+  background: var(--fundo);
+  color: var(--texto);
+  font: inherit;
+  font-size: 16px;
+  resize: vertical;
+  transition: border-color var(--dur-curta);
+}
+.contato__form input::placeholder,
+.contato__form textarea::placeholder {
+  color: var(--texto-3);
+}
+.contato__form input:focus-visible,
+.contato__form textarea:focus-visible {
+  outline: none;
+  border-color: var(--sinal);
+}
+.contato__form .botao {
+  justify-self: stretch;
+}
+.contato__aviso {
+  font-size: 11.5px;
+  color: var(--texto-3);
+}
+
+@media (max-width: 860px) {
+  .contato__grade {
+    grid-template-columns: 1fr;
+  }
+}

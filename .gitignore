@@ -11,3 +11,7 @@ site/ferramentas/shots/
 .DS_Store
 Thumbs.db
 .claude/
+
+# prévias locais
+/previa-*.jpg
+/provisoria.html

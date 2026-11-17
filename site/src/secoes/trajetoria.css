@@ -1,0 +1,95 @@
+.linha {
+  position: relative;
+  display: grid;
+  gap: 18px;
+}
+.linha::before {
+  content: '';
+  position: absolute;
+  left: 184px;
+  top: 10px;
+  bottom: 10px;
+  width: 1px;
+  background: linear-gradient(180deg, var(--sinal-borda), var(--linha) 18%, var(--linha) 82%, transparent);
+}
+.marco {
+  position: relative;
+  display: grid;
+  grid-template-columns: 160px 48px minmax(0, 1fr);
+  align-items: start;
+}
+.marco__quando {
+  padding-top: 24px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--texto-2);
+  text-align: right;
+}
+.marco__ponto {
+  justify-self: center;
+  width: 11px;
+  height: 11px;
+  margin-top: 29px;
+  margin-left: -1px;
+  border-radius: 50%;
+  background: var(--fundo);
+  box-shadow: inset 0 0 0 2px var(--texto-3);
+  transition: box-shadow var(--dur-media) var(--ease-saida);
+}
+.marco.em-cena .marco__ponto {
+  box-shadow: inset 0 0 0 2px var(--texto-2);
+}
+.marco--destaque .marco__ponto,
+.marco:first-child .marco__ponto {
+  background: var(--sinal);
+  box-shadow: 0 0 0 4px var(--sinal-suave);
+}
+.marco__cartao {
+  display: grid;
+  gap: 6px;
+  padding: 20px 24px 22px;
+}
+.marco__onde {
+  font-size: 11.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--texto-3);
+}
+.marco--destaque .marco__onde {
+  color: var(--sinal-2);
+}
+.marco h3 {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.marco__texto {
+  max-width: 64ch;
+  font-size: 15.5px;
+  color: var(--texto-2);
+}
+
+@media (max-width: 760px) {
+  .linha::before {
+    left: 5px;
+  }
+  .marco {
+    grid-template-columns: 22px minmax(0, 1fr);
+    grid-template-areas: 'ponto quando' 'ponto cartao';
+    row-gap: 8px;
+  }
+  .marco__quando {
+    grid-area: quando;
+    padding-top: 0;
+    text-align: left;
+    font-size: 13px;
+  }
+  .marco__ponto {
+    grid-area: ponto;
+    justify-self: start;
+    margin-top: 5px;
+  }
+  .marco__cartao {
+    grid-area: cartao;
+  }
+}

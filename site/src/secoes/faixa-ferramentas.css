@@ -1,0 +1,65 @@
+.faixa {
+  position: relative;
+  z-index: 1;
+  border-block: 1px solid var(--linha);
+  background: rgba(16, 19, 27, 0.5);
+}
+.faixa__dentro {
+  display: flex;
+  align-items: center;
+}
+.faixa__titulo {
+  flex: none;
+  padding: 0 28px 0 var(--margem);
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--texto-3);
+  white-space: nowrap;
+}
+.faixa__janela {
+  flex: 1;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.faixa__trilho {
+  display: flex;
+  width: max-content;
+  animation: faixa 60s linear infinite;
+}
+.faixa:hover .faixa__trilho {
+  animation-play-state: paused;
+}
+.faixa__grupo {
+  display: flex;
+  flex: none;
+}
+.faixa__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 18px 22px;
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--texto-2);
+  white-space: nowrap;
+  transition: color var(--dur-curta);
+}
+.faixa__item:hover {
+  color: var(--texto);
+}
+.faixa__item .logo {
+  opacity: 0.85;
+}
+@keyframes faixa {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@media (max-width: 700px) {
+  .faixa__titulo {
+    display: none;
+  }
+}
