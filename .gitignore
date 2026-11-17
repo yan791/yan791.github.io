@@ -1,0 +1,13 @@
+# material bruto e documentos internos (ficam só no computador)
+/imagens/
+/Novas Imagens/
+/PROMPT-PORTFOLIO.md
+/PENDENCIAS.md
+
+# app
+node_modules/
+site/dist/
+site/ferramentas/shots/
+.DS_Store
+Thumbs.db
+.claude/
