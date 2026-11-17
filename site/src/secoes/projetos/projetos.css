@@ -1,9 +1,3 @@
-.projetos__grade {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
-}
-
 .projeto {
   display: grid;
   grid-template-rows: auto 1fr;
@@ -74,16 +68,17 @@
   background: #f3f4f6;
   transition: transform 1s var(--ease-saida);
 }
-.projeto:hover .projeto__imagem {
+.projeto:hover .projeto__imagem,
+.vitrine__palco:hover .projeto__imagem {
   transform: scale(1.03);
 }
 
-/* terminal e Gantt dentro do cartão */
-.projeto__midia .term__janela {
+/* terminal e Gantt dentro da vitrine */
+.vitrine .term__janela {
   box-shadow: inset 0 0 0 1px var(--linha);
   border-radius: 12px;
 }
-.projeto__midia .term__corpo {
+.vitrine .term__corpo {
   height: auto;
   aspect-ratio: 16 / 8.6;
   font-size: 12.5px;
@@ -161,7 +156,180 @@
   color: var(--texto-3);
 }
 
-/* ---------- mais coisas que fiz ---------- */
+/* ---------- vitrine: lista + prévia ---------- */
+.vitrine {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.18fr);
+  gap: 10px;
+  margin-top: 16px;
+  padding: 10px;
+}
+.vitrine__lista {
+  display: grid;
+  align-content: start;
+}
+.vitrine__item {
+  position: relative;
+  border-bottom: 1px solid var(--linha);
+}
+.vitrine__item:last-child {
+  border-bottom: 0;
+}
+.vitrine__item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 20px;
+  width: 2px;
+  height: 24px;
+  border-radius: 2px;
+  background: var(--sinal);
+  transform: scaleY(0);
+  transition: transform var(--dur-media) var(--ease-saida);
+}
+.vitrine__item.esta-aberto::before {
+  transform: scaleY(1);
+}
+.vitrine__cabeca {
+  font: inherit;
+}
+.vitrine__botao {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr) auto 14px;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 64px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  text-align: left;
+  color: var(--texto-2);
+  transition: background var(--dur-curta) var(--ease-saida), color var(--dur-curta);
+}
+.vitrine__botao:hover {
+  background: var(--superficie-2);
+  color: var(--texto);
+}
+.vitrine__n {
+  font-size: 12px;
+  color: var(--texto-3);
+  transition: color var(--dur-curta);
+}
+.vitrine__nome {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+.vitrine__tipo {
+  font-size: 10.5px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--texto-3);
+  white-space: nowrap;
+}
+.vitrine__sinal {
+  position: relative;
+  width: 12px;
+  height: 12px;
+}
+.vitrine__sinal::before,
+.vitrine__sinal::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 5.25px;
+  width: 12px;
+  height: 1.5px;
+  border-radius: 2px;
+  background: currentColor;
+  transition: transform var(--dur-media) var(--ease-saida);
+}
+.vitrine__sinal::after {
+  transform: rotate(90deg);
+}
+.esta-aberto .vitrine__botao {
+  color: var(--texto);
+}
+.esta-aberto .vitrine__n {
+  color: var(--sinal);
+}
+.esta-aberto .vitrine__sinal::after {
+  transform: rotate(0deg);
+}
+.vitrine__painel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.55s var(--ease-saida);
+}
+.esta-aberto .vitrine__painel {
+  grid-template-rows: 1fr;
+}
+.vitrine__dentro {
+  min-height: 0;
+  overflow: hidden;
+}
+.vitrine__conteudo {
+  display: grid;
+  gap: 12px;
+  padding: 0 16px 22px 58px;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity 0.35s var(--ease-saida), transform 0.45s var(--ease-saida);
+}
+.esta-aberto .vitrine__conteudo {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.12s;
+}
+.vitrine__meta {
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--texto-3);
+}
+.vitrine__frase {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--texto-2);
+}
+.vitrine .projeto__feitos li {
+  font-size: 14px;
+}
+.vitrine__palco {
+  position: relative;
+  display: grid;
+  align-content: center;
+  padding: 18px;
+  border-radius: 14px;
+  background: radial-gradient(90% 70% at 70% 100%, var(--sinal-suave), transparent 70%), var(--superficie);
+  box-shadow: inset 0 0 0 1px var(--linha);
+}
+.vitrine__cena {
+  animation: cena-entra 0.6s var(--ease-saida) both;
+}
+@keyframes cena-entra {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+html.movimento-reduzido .vitrine__cena {
+  animation: none;
+}
+html.movimento-reduzido .vitrine__painel,
+html.movimento-reduzido .vitrine__conteudo {
+  transition: none;
+}
+.vitrine__midia-movel {
+  margin-bottom: 4px;
+}
+
+/* ---------- mais projetos que fiz ---------- */
 .mais {
   margin-top: clamp(56px, 7vw, 88px);
 }
@@ -262,10 +430,35 @@ a.mais__item:hover .mais__seta {
     padding: 22px 24px 26px;
   }
 }
-@media (max-width: 760px) {
-  .projetos__grade {
+@media (max-width: 960px) {
+  .vitrine {
     grid-template-columns: 1fr;
+    padding: 6px;
   }
+  .vitrine__conteudo {
+    padding: 0 12px 20px;
+  }
+}
+@media (max-width: 560px) {
+  .vitrine__botao {
+    grid-template-columns: 26px minmax(0, 1fr) 14px;
+    gap: 2px 10px;
+    padding: 14px 12px;
+  }
+  .vitrine__nome {
+    grid-column: 2;
+    font-size: 17px;
+  }
+  .vitrine__tipo {
+    grid-column: 2;
+    grid-row: 2;
+  }
+  .vitrine__sinal {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+  }
+}
+@media (max-width: 760px) {
   .mais__item {
     grid-template-columns: 1fr auto;
   }
@@ -276,7 +469,7 @@ a.mais__item:hover .mais__seta {
   .mais__seta {
     display: none;
   }
-  .projeto__midia .term__corpo {
+  .vitrine .term__corpo {
     aspect-ratio: auto;
     height: 220px;
   }

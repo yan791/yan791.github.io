@@ -18,9 +18,14 @@ await esperar(1800)
 ok(Math.abs((await topoDe(page, '#projetos')) - 96) < 30, `pílula leva a Projetos (top=${await topoDe(page, '#projetos')})`)
 ok(await page.$eval('.topo__pilula a[data-id="projetos"]', (a) => a.classList.contains('ativa')), 'item ativo da pílula acompanha a seção')
 
-// Gantt compacto
-await page.evaluate(() => document.querySelector('.gc').scrollIntoView({ block: 'center' }))
-await esperar(800)
+// a vitrine abre no primeiro projeto: a análise dos livros
+ok(await page.evaluate(() => document.querySelector('.vitrine__botao[aria-controls="vitrine-livros"]').getAttribute('aria-expanded') === 'true' && document.querySelector('.vitrine__palco img')?.getAttribute('src').includes('livros')), 'vitrine abre na análise dos livros')
+
+// Gantt compacto (escalonador, segundo da lista)
+await page.evaluate(() => document.querySelector('.vitrine').scrollIntoView({ block: 'center' }))
+await esperar(600)
+await page.click('.vitrine__botao[aria-controls="vitrine-escalonador"]')
+await esperar(900)
 ok((await page.$eval('.gc__resumo', (e) => e.textContent)) === '1 prazo perdido', 'RM: 1 prazo perdido')
 await page.click('.gc__alg button:nth-child(2)')
 await esperar(300)
@@ -41,6 +46,27 @@ ok(erro === 'Erro: a linha 2 nao respeita C <= D <= P.', `validação: "${erro}"
 await page.keyboard.press('Escape')
 await esperar(400)
 ok(!(await page.$eval('.simulador', (d) => d.open)), 'Esc fecha o simulador')
+
+// vitrine: a lista troca a prévia
+const vitrine = async (slug) => {
+  await page.click(`.vitrine__botao[aria-controls="vitrine-${slug}"]`)
+  await esperar(900)
+  return page.evaluate((slug) => ({
+    aberto: document.querySelector(`.vitrine__botao[aria-controls="vitrine-${slug}"]`).getAttribute('aria-expanded') === 'true',
+    abertos: document.querySelectorAll('.vitrine__botao[aria-expanded="true"]').length,
+    img: document.querySelector('.vitrine__palco img')?.getAttribute('src') || '',
+    terminal: !!document.querySelector('.vitrine__palco .term__janela'),
+  }), slug)
+}
+let v = await vitrine('nutrichoice')
+ok(v.aberto && v.abertos === 1 && v.img.includes('nutrichoice'), 'vitrine: NutriChoice abre com a tela do cardápio')
+v = await vitrine('processflow')
+ok(v.aberto && v.terminal, 'vitrine: ProcessFlow mostra o terminal')
+v = await vitrine('livros')
+ok(v.aberto && v.img.includes('livros'), 'vitrine: análise dos livros mostra o painel')
+await page.focus('.vitrine__item:last-child .vitrine__botao')
+await page.keyboard.press('ArrowDown')
+ok(await page.evaluate(() => document.activeElement === document.querySelector('.vitrine__item:nth-child(1) .vitrine__botao')), 'vitrine: seta para baixo volta ao primeiro item')
 
 // certificado
 await page.evaluate(() => document.querySelector('.bento__mostra').scrollIntoView({ block: 'center' }))
@@ -76,6 +102,11 @@ ok(await page.$eval('.doca', (d) => getComputedStyle(d).display !== 'none'), 'do
 await page.tap('.doca a[aria-label="Trajetória"]')
 await esperar(1800)
 ok(Math.abs((await topoDe(page, '#trajetoria')) - 96) < 40, `doca leva à Trajetória (top=${await topoDe(page, '#trajetoria')})`)
+await page.evaluate(() => document.querySelector('.vitrine').scrollIntoView())
+await esperar(800)
+await page.tap('.vitrine__botao[aria-controls="vitrine-recifesafe"]')
+await esperar(1200)
+ok(await page.evaluate(() => !document.querySelector('.vitrine__palco') && !!document.querySelector('#vitrine-recifesafe .vitrine__midia-movel img')), 'celular: a vitrine vira acordeão com a tela dentro')
 console.log(erros.filter((e) => !e.includes('ERR_ABORTED')).join('\n') || 'celular: sem erros no console')
 await browser.close()
 console.log(falhas ? `${falhas} falha(s)` : 'todas as interações passaram')

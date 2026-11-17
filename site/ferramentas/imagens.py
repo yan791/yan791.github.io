@@ -1,5 +1,5 @@
-# Prepara as imagens do site em public/midia (fotos do Yan, Mostra e telas do IntelliFit).
-# Uso: python -I ferramentas/imagens.py
+# Prepara as imagens do site em public/midia (fotos do Yan, Mostra e telas dos projetos).
+# Uso: python ferramentas/imagens.py [retrato] [mostra] [telas]   (sem argumentos: tudo)
 import os
 from PIL import Image, ImageOps
 
@@ -7,7 +7,6 @@ AQUI = os.path.dirname(os.path.abspath(__file__))
 RAIZ = os.path.normpath(os.path.join(AQUI, '..', '..'))
 PUBLICO = os.path.join(RAIZ, 'site', 'public', 'midia')
 NOVAS = os.path.join(RAIZ, 'Novas Imagens')
-IF_BRUTO = os.path.join(RAIZ, 'imagens', 'projetos', 'intellifit')
 
 
 def salvar(im, *caminho, q=82):
@@ -33,33 +32,27 @@ def mostra():
     salvar(Image.open(os.path.join(NOVAS, 'certificado_destaque_mostratech.jpeg')).convert('RGB'), 'mostra', 'certificado.webp', q=88)
 
 
-# 3. telas do IntelliFit, recortadas no cartão de conteúdo (abaixo da barra azul)
-def intellifit():
-    for nome in ['01-dashboard', '02-anotacoes', '03-nova-anotacao', '04-progresso', '05-treinos', '06-anotacao']:
-        im = Image.open(os.path.join(IF_BRUTO, f'{nome}.png')).convert('RGB')
-        w, h = im.size
-        barra = 76
-        fundo = im.getpixel((8, barra + 12))
-        conteudo = im.crop((0, barra, w, h))
-        # caixa dos pixels diferentes do fundo
-        px = conteudo.load()
-        xs, ys = [], []
-        for y in range(0, conteudo.size[1], 2):
-            for x in range(0, w, 2):
-                r, g, b = px[x, y]
-                if abs(r - fundo[0]) + abs(g - fundo[1]) + abs(b - fundo[2]) > 18:
-                    xs.append(x)
-                    ys.append(y)
-        x0, x1, y0, y1 = max(min(xs) - 28, 0), min(max(xs) + 28, w), max(min(ys) - 28, 0), min(max(ys) + 28, conteudo.size[1])
-        cartao = conteudo.crop((x0, y0, x1, y1))
-        # a barra do app volta por cima, na largura do recorte, para a tela ser reconhecível
-        topo = im.crop((0, 0, w, barra)).resize((cartao.size[0], round(barra * cartao.size[0] / w)))
-        final = Image.new('RGB', (cartao.size[0], cartao.size[1] + topo.size[1]), fundo)
-        final.paste(topo, (0, 0))
-        final.paste(cartao, (0, topo.size[1]))
-        salvar(final, 'intellifit', f'{nome[3:]}.webp')
+# 3. telas dos projetos rodando localmente (capturas de fotos-nutrichoice.mjs e fotos-livros.mjs), em 16:10
+TELAS = {
+    # destino: (captura, recorte x0, y0, x1, y1 ou None para a tela inteira)
+    ('nutrichoice', 'cardapio.webp'): ('nutrichoice/03-cardapio.png', (150, 0, 1200, 656)),
+    ('livros', 'painel.webp'): ('livros/01-inicio.png', None),
+    ('recifesafe', 'painel.webp'): ('recifesafe/01-topo.png', None),
+}
 
 
-retrato()
-mostra()
-intellifit()
+def telas():
+    for (pasta, nome), (origem, caixa) in TELAS.items():
+        im = Image.open(os.path.join(RAIZ, 'imagens', 'projetos', origem)).convert('RGB')
+        if caixa:
+            im = im.crop(caixa)
+        if im.size[0] > 1280:
+            im = im.resize((1280, round(im.size[1] * 1280 / im.size[0])), Image.LANCZOS)
+        salvar(im, pasta, nome, q=84)
+
+
+if __name__ == '__main__':
+    import sys
+    passos = {'retrato': retrato, 'mostra': mostra, 'telas': telas}
+    for nome in sys.argv[1:] or passos:
+        passos[nome]()

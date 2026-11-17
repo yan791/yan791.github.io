@@ -166,9 +166,13 @@
   padding: 24px;
 }
 
-@media (max-width: 1023px) {
+/* abaixo de 1280px o texto ocupa a linha inteira, para o bloco não ficar alto demais */
+@media (max-width: 1279px) {
   .bento__texto {
     grid-column: 1 / -1;
+  }
+  .bento__texto p {
+    max-width: 74ch;
   }
   .bento__foto {
     grid-column: span 5;
@@ -176,6 +180,8 @@
   .bento__mostra {
     grid-column: span 7;
   }
+}
+@media (max-width: 1023px) {
   .bento__mini {
     grid-column: span 6;
   }

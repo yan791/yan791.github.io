@@ -69,6 +69,12 @@
   min-height: 1.45em;
   color: var(--texto-2);
 }
+/* no celular as frases longas quebram em duas linhas: reserva o espaço para a capa não pular */
+@media (max-width: 640px) {
+  .hero__linha--forte {
+    min-height: 2.9em;
+  }
+}
 .rotativo {
   color: var(--texto);
   font-weight: 500;

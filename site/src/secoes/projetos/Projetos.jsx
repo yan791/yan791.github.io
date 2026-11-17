@@ -1,12 +1,12 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react'
 import VideoLoop from '../../componentes/VideoLoop.jsx'
 import TerminalProcessFlow from '../../componentes/TerminalProcessFlow.jsx'
 import GanttCompacto from '../../componentes/GanttCompacto.jsx'
 import EscalonadorInterativo from '../../componentes/EscalonadorInterativo.jsx'
-import { maisCoisas, projetos, projetosIntro } from '../../dados/projetos.js'
+import { destaque, maisCoisas, projetos, projetosIntro } from '../../dados/projetos.js'
 import { perfil } from '../../dados/perfil.js'
 import { useEmCena } from '../../lib/visivel.js'
-import { pararTemporario } from '../../lib/rolagem.js'
+import { irPara, pararTemporario } from '../../lib/rolagem.js'
 import './projetos.css'
 
 function Moldura({ endereco, children }) {
@@ -49,11 +49,11 @@ function Midia({ p, aoAbrirSimulador }) {
   return null
 }
 
-function Cartao({ p, i, aoAbrirSimulador }) {
+function Destaque({ p }) {
   return (
-    <article className={`cartao cartao--vivo projeto revelar${p.largo ? ' projeto--largo' : ''}`} style={{ '--i': i }} aria-labelledby={`nome-${p.slug}`}>
+    <article className="cartao cartao--vivo projeto projeto--largo revelar" style={{ '--i': 3 }} aria-labelledby={`nome-${p.slug}`}>
       <div className="projeto__midia">
-        <Midia p={p} aoAbrirSimulador={aoAbrirSimulador} />
+        <Midia p={p} />
       </div>
       <div className="projeto__corpo">
         <p className="projeto__meta mono">
@@ -98,6 +98,125 @@ function Cartao({ p, i, aoAbrirSimulador }) {
         {p.nota ? <p className="projeto__nota mono">{p.nota}</p> : null}
       </div>
     </article>
+  )
+}
+
+// lista à esquerda e prévia do projeto aberto à direita; no celular vira um acordeão com a mídia dentro
+const LARGO = '(min-width: 961px)'
+function useLargo() {
+  return useSyncExternalStore(
+    (f) => {
+      const m = matchMedia(LARGO)
+      m.addEventListener('change', f)
+      return () => m.removeEventListener('change', f)
+    },
+    () => matchMedia(LARGO).matches,
+    () => true,
+  )
+}
+
+function Detalhe({ p }) {
+  return (
+    <>
+      <p className="vitrine__meta mono">{p.meta.join(' · ')}</p>
+      <p className="vitrine__frase">{p.frase}</p>
+      <ul className="projeto__feitos">
+        {p.feitos.map((f) => (
+          <li key={f}>{f}</li>
+        ))}
+      </ul>
+      <ul className="chips" aria-label="Tecnologias">
+        {p.stack.map((s) => (
+          <li key={s} className="chip">
+            {s}
+          </li>
+        ))}
+      </ul>
+      <div className="projeto__links">
+        {p.links.codigo ? (
+          <a className="link" href={p.links.codigo} target="_blank" rel="noreferrer">
+            Código <span className="seta">↗</span>
+            <span className="so-leitor">: {p.nome}</span>
+          </a>
+        ) : null}
+      </div>
+      {p.nota ? <p className="projeto__nota mono">{p.nota}</p> : null}
+    </>
+  )
+}
+
+function Vitrine({ aoAbrirSimulador }) {
+  const [ativo, setAtivo] = useState(0)
+  const largo = useLargo()
+  const botoes = useRef([])
+  const itens = useRef([])
+  const atual = projetos[ativo]
+
+  // no celular o item aberto acima fecha e o tocado sobe; se ele sair da tela, a página volta até ele
+  const abrir = (i) => {
+    setAtivo(i)
+    if (largo || i === ativo) return
+    setTimeout(() => {
+      const el = itens.current[i]
+      if (el && el.getBoundingClientRect().top < 56) irPara(el)
+    }, 600)
+  }
+
+  const teclas = (e, i) => {
+    const passo = { ArrowDown: 1, ArrowUp: -1 }[e.key]
+    if (!passo) return
+    e.preventDefault()
+    const n = (i + passo + projetos.length) % projetos.length
+    botoes.current[n]?.focus()
+  }
+
+  return (
+    <div className="vitrine cartao revelar" style={{ '--i': 4 }}>
+      <ol className="vitrine__lista">
+        {projetos.map((p, i) => {
+          const aberto = i === ativo
+          return (
+            <li key={p.slug} ref={(el) => (itens.current[i] = el)} className={`vitrine__item${aberto ? ' esta-aberto' : ''}`}>
+              <h3 className="vitrine__cabeca">
+                <button
+                  ref={(el) => (botoes.current[i] = el)}
+                  type="button"
+                  className="vitrine__botao"
+                  aria-expanded={aberto}
+                  aria-controls={`vitrine-${p.slug}`}
+                  onClick={() => abrir(i)}
+                  onKeyDown={(e) => teclas(e, i)}
+                >
+                  <span className="vitrine__n mono">{String(i + 1).padStart(2, '0')}</span>
+                  <span className="vitrine__nome">{p.nome}</span>
+                  <span className="vitrine__tipo mono">{p.tipo}</span>
+                  <span className="vitrine__sinal" aria-hidden="true" />
+                </button>
+              </h3>
+              <div id={`vitrine-${p.slug}`} className="vitrine__painel" inert={!aberto}>
+                <div className="vitrine__dentro">
+                  <div className="vitrine__conteudo">
+                    {!largo && aberto ? (
+                      <div className="vitrine__midia-movel">
+                        <Midia p={p} aoAbrirSimulador={aoAbrirSimulador} />
+                      </div>
+                    ) : null}
+                    <Detalhe p={p} />
+                  </div>
+                </div>
+              </div>
+            </li>
+          )
+        })}
+      </ol>
+      {largo ? (
+        <div className="vitrine__palco">
+          <div key={atual.slug} className="vitrine__cena">
+            <Midia p={atual} aoAbrirSimulador={aoAbrirSimulador} />
+          </div>
+        </div>
+      ) : null}
+    </div>
   )
 }
 
@@ -155,15 +274,12 @@ export default function Projetos() {
           </p>
         </header>
 
-        <div className="projetos__grade">
-          {projetos.map((p, i) => (
-            <Cartao key={p.slug} p={p} i={i % 2} aoAbrirSimulador={() => setSimulador(true)} />
-          ))}
-        </div>
+        <Destaque p={destaque} />
+        <Vitrine aoAbrirSimulador={() => setSimulador(true)} />
 
         <div className="mais">
           <div className="mais__topo">
-            <h3 className="mais__titulo">Mais coisas que fiz</h3>
+            <h3 className="mais__titulo">Mais projetos que fiz</h3>
             <a className="link" href={perfil.repositorios} target="_blank" rel="noreferrer">
               Todos os repositórios <span className="seta">↗</span>
             </a>

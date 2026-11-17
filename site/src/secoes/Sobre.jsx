@@ -6,15 +6,20 @@ import { useEmCena } from '../lib/visivel.js'
 import './sobre.css'
 
 function Texto() {
-  // o primeiro parágrafo destaca a expressão principal
-  const [antes, depois] = sobre.paragrafos[0].split(sobre.destaque)
+  // o primeiro parágrafo destaca a expressão principal (se ela não estiver no texto, sai sem destaque)
+  const primeiro = sobre.paragrafos[0]
+  const pos = sobre.destaque ? primeiro.indexOf(sobre.destaque) : -1
   return (
     <>
-      <p>
-        {antes}
-        <mark>{sobre.destaque}</mark>
-        {depois}
-      </p>
+      {pos < 0 ? (
+        <p>{primeiro}</p>
+      ) : (
+        <p>
+          {primeiro.slice(0, pos)}
+          <mark>{sobre.destaque}</mark>
+          {primeiro.slice(pos + sobre.destaque.length)}
+        </p>
+      )}
       {sobre.paragrafos.slice(1).map((p) => (
         <p key={p}>{p}</p>
       ))}

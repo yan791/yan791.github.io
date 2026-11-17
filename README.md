@@ -16,7 +16,7 @@ No ar em **https://yan791.github.io**.
 
 - **Escalonador RM × EDF interativo:** `src/lib/escalonamento.js` é um porte linha a linha do `simulation.c` do [projeto em C](https://github.com/yan791/Escalonamento_de_tarefas_criticas_de_voo). Os testes comparam a saída com a do programa compilado com gcc em 8 entradas, nos dois algoritmos (`src/lib/__fixtures__/escalonador.json`).
 - **Calendário do GitHub:** dados reais de contribuições, salvos em `src/dados/contribuicoes.json`.
-- **Mídias reais:** os vídeos da SOLA. e da arquivo® foram gravados dos sites no ar com `site/ferramentas/capturar.mjs` e convertidos com `site/ferramentas/midia.py`.
+- **Mídias reais:** o vídeo da SOLA. foi gravado do site no ar com `site/ferramentas/capturar.mjs` e convertido com `site/ferramentas/midia.py`. As telas do NutriChoice, do RecifeSafe e da análise dos livros foram capturadas com os projetos rodando localmente (`fotos-nutrichoice.mjs` e `fotos-livros.mjs`) e preparadas com `python ferramentas/imagens.py telas`.
 
 ## Rodar localmente
 

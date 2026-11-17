@@ -12,19 +12,26 @@ export const perfil = {
 }
 
 export const hero = {
-  linha: 'Estudante de Ciência da Computação na CESAR School, em Recife.',
-  rotativo: ['sistemas em C perto do sistema operacional.', 'back-ends em Django e Flask.', 'interfaces com 3D e movimento.', 'dashboards com dados públicos.'],
+  linha: 'Estudante de Ciência da Computação na CESAR School e dev freelancer.',
+  rotativo: [
+    'sistemas em C perto do sistema operacional.',
+    'back-ends em Django e Flask.',
+    'automatização de processos.',
+    'dashboards em React.',
+    'sites para clientes sob medida, do 2D ao 3D.',
+    'APIs com Python.',
+  ],
   credenciais: ['Recife, PE', 'CESAR School · 2024 a 2028', 'Projeto Destaque · Mostra TechDesign', 'Procurando estágio'],
 }
 
 export const sobre = {
   titulo: 'Gosto de entender como as coisas rodam por dentro.',
   paragrafos: [
-    'Curso Ciência da Computação na CESAR School, com conclusão prevista para 2028. Na faculdade passo boa parte do tempo perto do sistema operacional: processos, threads, escalonamento e sincronização em C, além de back-ends em Python e Java com banco de dados.',
-    'Fora das disciplinas, levo o mesmo cuidado para a interface. Fiz duas lojas conceito em 3D com React e three.js, com imagens tratadas por scripts em Python e testes que medem a fluidez de cada quadro.',
-    'Uso Claude Code e ChatGPT no dia a dia para prototipar, implementar e revisar. As decisões continuam sendo minhas.',
+    'Sou estudante de Ciência da Computação na CESAR School, com previsão de conclusão em 2028. Durante a graduação, venho aprofundando meus conhecimentos em sistemas operacionais, trabalhando com processos, threads, escalonamento e sincronização em C. Também desenvolvo back-ends com Python e Java, integrados a bancos de dados.',
+    'Fora da sala de aula, gosto de explorar outras possibilidades de desenvolvimento. Criei duas lojas conceituais em 3D utilizando React e Three.js, trabalhando também com scripts em Python para o tratamento de imagens e testes para avaliar o desempenho e a fluidez das interfaces.',
+    'No dia a dia, utilizo ferramentas como Claude Code e ChatGPT para tirar dúvidas, testar ideias e revisar implementações. Vejo a inteligência artificial como uma ferramenta de apoio ao desenvolvimento, sem abrir mão de entender o código e tomar minhas próprias decisões técnicas.',
   ],
-  destaque: 'perto do sistema operacional',
+  destaque: 'sistemas operacionais',
   foto: { src: '/midia/yan/retrato.webp', alt: 'Yan Ribeiro Nunes sorrindo, de camiseta preta.' },
   mostra: {
     src: '/midia/mostra/equipe.webp',
@@ -38,7 +45,7 @@ export const sobre = {
   cartoes: [
     { icone: 'curso', titulo: 'Ciência da Computação', onde: 'CESAR School · 2024 a 2028', texto: 'Conclusão prevista para dezembro de 2028.' },
     { icone: 'infra', titulo: 'Infraestrutura de Software', onde: 'CESAR School · 2026', texto: 'Seis projetos em C: processos, threads, escalonamento e sincronização.' },
-    { icone: 'agora', titulo: 'Estudando agora', onde: 'Agora', agora: true, texto: 'Redes de computadores, sistemas operacionais e bancos de dados.' },
+    { icone: 'agora', titulo: 'Estudando agora', onde: 'Agora', agora: true, texto: 'Sistemas Operacionais, banco de dados e automação.' },
   ],
 }
 
